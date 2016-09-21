@@ -1,1 +1,8 @@
 /* Empty. Add your own CSS if you like */
+.large {
+  font-size: 90px;
+}
+
+.button-size {
+  font-size: 40px;
+}

@@ -60,6 +60,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   })
 
+  .state('tab.panier', {
+      url: '/panier',
+      views: {
+        'tab-panier': {
+          templateUrl: 'templates/tab-panier.html',
+          controller: 'PanierCtrl'
+        }
+      }
+    })
+/*
   .state('tab.chats', {
       url: '/chats',
       views: {
@@ -69,6 +79,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
+
     .state('tab.chat-detail', {
       url: '/chats/:chatId',
       views: {
@@ -78,7 +89,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
-
+*/
   .state('tab.account', {
     url: '/account',
     views: {
@@ -90,6 +101,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/products');
+  $urlRouterProvider.otherwise('/tab/home');
 
 });

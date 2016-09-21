@@ -2,6 +2,8 @@ angular.module('starter.controllers', [])
 
 .controller('ProductsCtrl', function($scope) {})
 
+.controller('PanierCtrl', function($scope) {})
+
 .controller('HomeCtrl', function($scope) {
   $scope.settings = {
     enableFriends: true

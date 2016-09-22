@@ -1,4 +1,47 @@
 angular.module('starter.services', [])
+.factory('Panier', function() {
+  panier = [];
+  return {
+    all: function() {
+      return panier;
+    },
+    get_number: function (produitID) {
+      for (var i = 0; i < panier.length; i++) {
+        if (panier[i].id === produitID) {
+          return panier[i].number;
+        }
+      }
+      return 0;
+    },
+    add_to_panier: function(produitID) {
+      for (var i = 0; i < panier.length; i++) {
+        if(panier[i].id === produitID){
+          panier[i].number++;
+          return 1;
+        }
+      }
+      var prod = '{"id" : ' + produitID + ', "number" : 1 }';
+      panier.push(JSON.parse(prod));
+      return null;
+    },
+    remove_from_panier: function(produitID) {
+      for (var i = 0; i < panier.length; i++) {
+        if(panier[i].id === produitID) {
+          if (panier[i].number > 0) {
+            panier[i].number--;
+            if (panier[i].number === 0) {
+              panier.splice(i, 1);
+            }
+          return 1;
+          } else {
+            panier.splice(i, 1);
+          }
+        }
+      }
+      return null;
+   }
+ };
+})
 
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array

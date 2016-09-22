@@ -5,16 +5,23 @@
         <div class="item item-divider">
           Alcools
         </div>
-        <a class="item item-thumbnail-left" href="#">
-          <img ng-src="img/mike.png">
-          <h2>Pretty Hate Machine</h2>
-          <p>Nine Inch Nails</p>
-        </a>
-
-        <a class="item item-thumbnail-left" href="#">
-          <img ng-src="{{product.pic}}">
-          <h2>{{product.name}}</h2>
-          <p>{{product.description}}</p>
+        <a ng-repeat="article in panier" class="item item-thumbnail-left">
+          <img ng-src="{{get_product(article.id).pic}}">
+          <h2>{{get_product(article.id).name}}</h2>
+          <div class="row">
+          <button class="disable-hover button button-default button-light button-icon-left" ng-click="add_to_panier(article.id)">
+            <span class="button-inner">
+            <i class="icon ion-ios-plus button-size"></i>
+            </span>
+          </button>
+          <button class="disable-hover button button-default button-light button-icon-right" ng-click="remove_from_panier(article.id)">
+            <span class="button-inner">
+            <i class="icon ion-ios-minus button-size"></i>
+            </span>
+          </button>
+          {{get_number(article.id)}}
+        </div>
+          <p>{{get_product(article.id).description}}</p>
         </a>
       </ion-list>
     </ion-item>

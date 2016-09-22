@@ -1,46 +1,39 @@
 angular.module('starter.controllers', [])
 
-.controller('ProductsCtrl', function($scope, Chats) {
-  $scope.panier = [];
+.controller('ProductsCtrl', function($scope, Chats, Panier) {
+  $scope.panier = Panier.all();
   $scope.products = Chats.all();
-  $scope.get_number = function(produitID) {
-    for (var i = 0; i < $scope.panier.length; i++) {
-      if ($scope.panier[i].id === produitID) {
-        return $scope.panier[i].number;
-      }
-    }
-    return 0;
+  $scope.get_number = function(ID) {
+    return Panier.get_number(ID);
   };
-
-  $scope.add_to_panier = function(produitID) {
-    for (var i = 0; i < $scope.panier.length; i++) {
-      if($scope.panier[i].id === produitID){
-        $scope.panier[i].number++;
-        return 1;
-      }
-    }
-    var prod = '{"id" : ' + produitID + ', "number" : 1 }';
-    $scope.panier.push(JSON.parse(prod));
-    return null;
+  $scope.add_to_panier = function (ID) {
+    Panier.add_to_panier(ID);
   };
-
-  $scope.remove_from_panier = function(produitID) {
-    for (var i = 0; i < $scope.panier.length; i++) {
-      if($scope.panier[i].id === produitID) {
-        if ($scope.panier[i].number > 0) {
-        $scope.panier[i].number--;
-        return 1;
-        }
-      } else {
-        $scope.panier.splice(i);
-      }
-    }
-    return null;
+  $scope.remove_from_panier = function (ID) {
+    Panier.remove_from_panier(ID);
   };
 
 })
 
-.controller('PanierCtrl', function($scope) {})
+.controller('PanierCtrl', function($scope, Panier, Chats) {
+  $scope.panier = Panier.all();
+  $scope.products = Chats.all();
+  $scope.get_product = function (ID) {
+    return Chats.get(ID)
+  }
+  $scope.get_number = function(ID) {
+    return Panier.get_number(ID);
+  };
+  $scope.add_to_panier = function (ID) {
+    Panier.add_to_panier(ID);
+  };
+  $scope.remove_from_panier = function (ID) {
+    Panier.remove_from_panier(ID);
+  };
+  for (var i; i < panier.length; i++) {
+
+  }
+})
 
 .controller('HomeCtrl', function($scope) {
   $scope.settings = {

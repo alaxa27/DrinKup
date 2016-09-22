@@ -1,0 +1,6 @@
+{
+    "name": "LateLIfe",
+    "dependencies": {
+	    "ionicons" : "latest"
+    }
+}

@@ -5,27 +5,22 @@
         <div class="item item-divider">
           Alcools
         </div>
-
-        <a class="item item-thumbnail-left" href="#">
-          <img ng-src="img/ben.png">
-          <h2>Pretty Hate Machine</h2>
-            <button class="disable-hover button button-default button-light button-icon-left">
-              <span class="button-inner">
-              <i class="icon ion-ios-plus button-size"></i>
-              </span>
-            </button>
-            <button class="disable-hover button button-default button-light button-icon-left">
-              <span class="button-inner">
-              <i class="icon ion-ios-minus button-size"></i>
-              </span>
-            </button>
-
-          <p>Nine Inch Nails</p>
-        </a>
-
-        <a class="item item-thumbnail-left" href="#">
+        <a ng-repeat="product in products" class="item item-thumbnail-left">
           <img ng-src="{{product.pic}}">
           <h2>{{product.name}}</h2>
+          <div class="row">
+          <button class="disable-hover button button-default button-light button-icon-left" ng-click="add_to_panier(product.id)">
+            <span class="button-inner">
+            <i class="icon ion-ios-plus button-size"></i>
+            </span>
+          </button>
+          <button class="disable-hover button button-default button-light button-icon-right" ng-click="remove_from_panier(product.id)">
+            <span class="button-inner">
+            <i class="icon ion-ios-minus button-size"></i>
+            </span>
+          </button>
+          {{get_number(product.id)}}
+        </div>
           <p>{{product.description}}</p>
         </a>
       </ion-list>

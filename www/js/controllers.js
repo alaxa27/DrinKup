@@ -1,6 +1,44 @@
 angular.module('starter.controllers', [])
 
-.controller('ProductsCtrl', function($scope) {})
+.controller('ProductsCtrl', function($scope, Chats) {
+  $scope.panier = [];
+  $scope.products = Chats.all();
+  $scope.get_number = function(produitID) {
+    for (var i = 0; i < $scope.panier.length; i++) {
+      if ($scope.panier[i].id === produitID) {
+        return $scope.panier[i].number;
+      }
+    }
+    return 0;
+  };
+
+  $scope.add_to_panier = function(produitID) {
+    for (var i = 0; i < $scope.panier.length; i++) {
+      if($scope.panier[i].id === produitID){
+        $scope.panier[i].number++;
+        return 1;
+      }
+    }
+    var prod = '{"id" : ' + produitID + ', "number" : 1 }';
+    $scope.panier.push(JSON.parse(prod));
+    return null;
+  };
+
+  $scope.remove_from_panier = function(produitID) {
+    for (var i = 0; i < $scope.panier.length; i++) {
+      if($scope.panier[i].id === produitID) {
+        if ($scope.panier[i].number > 0) {
+        $scope.panier[i].number--;
+        return 1;
+        }
+      } else {
+        $scope.panier.splice(i);
+      }
+    }
+    return null;
+  };
+
+})
 
 .controller('PanierCtrl', function($scope) {})
 
@@ -20,6 +58,7 @@ angular.module('starter.controllers', [])
   //});
 
   $scope.chats = Chats.all();
+  $scope.products = Chats.all();
   $scope.remove = function(chat) {
     Chats.remove(chat);
   };

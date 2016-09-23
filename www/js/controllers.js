@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('ProductsCtrl', function($scope, Chats, Panier) {
+.controller('ProductsCtrl', function($scope, $state, Chats, Panier) {
   $scope.panier = Panier.all();
   $scope.products = Chats.all();
   $scope.get_number = function(ID) {
@@ -11,6 +11,10 @@ angular.module('starter.controllers', [])
   };
   $scope.remove_from_panier = function (ID) {
     Panier.remove_from_panier(ID);
+  };
+
+  $scope.go_to_panier = function() {
+    $state.go('tab.panier');
   };
 
 })
@@ -35,9 +39,20 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('HomeCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
+.controller('HomeCtrl', function($scope, $state, $ionicSlideBoxDelegate) {
+  $scope.startApp = function() {
+    $state.go('tab.products');
+  };
+  $scope.next = function() {
+    $ionicSlideBoxDelegate.next();
+  };
+  $scope.previous = function() {
+    $ionicSlideBoxDelegate.previous();
+  };
+
+  // Called each time the slide changes
+  $scope.slideChanged = function(index) {
+    $scope.slideIndex = index;
   };
 })
 

@@ -1,34 +1,27 @@
 <ion-view view-title="Produits">
   <ion-nav-buttons side="right">
-    <button ng-click="go_to_panier()" >
-      Panier
-    </button>
+    <a class="button" href="#/tab/panier" >
+      Panier!
+    </a>
   </ion-nav-buttons>
   <ion-content>
-    <ion-item>
+    <div ng-repeat="category in categories" >
       <div class="item item-divider">
-        Alcools
+        {{category.name}}
       </div>
       <ion-list>
-        <a ng-repeat="product in products" class="item item-thumbnail-left">
-          <img ng-src="{{product.pic}}">
-          <h2>{{product.name}}</h2>
-          <div class="row">
-          <button class="disable-hover button button-default button-light button-icon-left" ng-click="add_to_panier(product.id)">
-            <span class="button-inner">
-            <i class="icon ion-ios-plus button-size"></i>
-            </span>
-          </button>
-          <button class="disable-hover button button-default button-light button-icon-right" ng-click="remove_from_panier(product.id)">
-            <span class="button-inner">
-            <i class="icon ion-ios-minus button-size"></i>
-            </span>
-          </button>
-          {{get_number(product.id)}}
+        <div ng-repeat="product in products">
+          <a ng-hide="product.category != category.id || product.display != true" class="item item-thumbnail-left" ng-click="show_modal(product.id)">
+            <img ng-src="{{product.pic}}">
+            <h2>{{product.name}}</h2>
+            <div class="row">
+              {{get_number(product.id)}}
+              <div class="ion-chevron-right"></div>
+            </div>
+            <p>{{product.description}}</p>
+          </a>
         </div>
-          <p>{{product.description}}</p>
-        </a>
       </ion-list>
-    </ion-item>
-  </ionc-content>
+    </div>
+  </ion-content>
 </ion-view>

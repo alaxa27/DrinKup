@@ -1,0 +1,37 @@
+<ion-modal-view on-swipe-down="on_swipe_down()">
+  <ion-header-bar class="bar bar-header bar-positive">
+    <h1 class="title">{{product.name}}</h1>
+    <button class="ion-chevron-down button button-clear button-primary" ng-click="modal.hide()"></button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div class="list">
+      <div class="row">
+        <button class="disable-hover button button-default button-light button-icon-right" ng-click="remove_from_panier(product.id)">
+          <span class="button-inner">
+          <i class="icon ion-ios-minus button-size"></i>
+          </span>
+        </button>
+        <h2 class="title">{{get_number(product.id)}}</h2>
+        <button class="disable-hover button button-default button-light button-icon-left" ng-click="add_to_panier(product.id)">
+          <span class="button-inner">
+          <i class="icon ion-ios-plus button-size"></i>
+          </span>
+        </button>
+      </div>
+    </div>
+    <ion-list ng-if="product.pack && get_number(product.id)">
+      <ion-radio ng-repeat="prod in product.pack" ng-value="prod.id" ng-model="pack_size" ng-change="push_to_panier(product.id, pack_size)">
+        <row>
+          {{prod.name}}
+          {{prod.description}}
+          <p>Produits:
+            <ion-list>
+              <ion-item ng-repeat="item in prod.products">
+                <row>{{products[item.id].name}} : x{{item.quantity}}
+              </ion-item>
+            </ion-list>
+        </row>
+      </ion-radio>
+    </ion-list>
+  </ion-content>
+</ion-modal-view>

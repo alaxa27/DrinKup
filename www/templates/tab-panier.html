@@ -1,4 +1,9 @@
 <ion-view view-title="Panier">
+  <ion-nav-buttons side="right">
+    <a class="button" ng-click="charge()" >
+      Payer!
+    </a>
+  </ion-nav-buttons>
   <ion-content>
     <div ng-show="panier.length > 0">
       <ion-list>
@@ -18,5 +23,6 @@
     <div ng-hide="panier.length > 0">
       Votre panier est actuellement vide. Remplis le donc!
     </div>
-  </ionc-content>
+    <h1>Total: {{total()}}</h1>
+  </ion-content>
 </ion-view>

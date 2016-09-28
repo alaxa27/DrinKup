@@ -1,6 +1,7 @@
 {
     "name": "LateLIfe",
     "dependencies": {
-	    "ionicons" : "latest"
+	    "ionicons" : "latest",
+	    "angular-stripe-checkout" : "latest"
     }
 }

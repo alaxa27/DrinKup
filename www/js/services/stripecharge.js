@@ -1,5 +1,4 @@
-angular.module('starter.services', [])
-.factory('StripeCharge', function($q, $http, StripeCheckout) {
+drinkup.factory('StripeCharge', function($q, $http, StripeCheckout) {
   var self = this;
 
   // add the following headers for authentication

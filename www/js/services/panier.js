@@ -46,7 +46,6 @@ drinkup.factory('Panier', function() {
           total += products[panier[i].id].price * panier[i].number;
         }
       }
-      console.log(total);
       return total;
     },
     remove_from_panier: function(produitID) {

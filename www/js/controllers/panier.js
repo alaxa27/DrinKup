@@ -1,4 +1,4 @@
-drinkup.controller('PanierCtrl', function($scope, $ionicModal, Panier, Chats, StripeCharge) {
+drinkup.controller('PanierCtrl', function($scope, $ionicModal, Panier, Chats, StripeCharge, ModalProducts) {
 
   $scope.ProductMeta = {
     title: "Commande",
@@ -84,55 +84,11 @@ drinkup.controller('PanierCtrl', function($scope, $ionicModal, Panier, Chats, St
 
   }
 
-  $ionicModal.fromTemplateUrl('templates/modal-products.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
-  $scope.show_modal = function (ID) {
-    $scope.modal.show();
-    $scope.modal.scope.products = $scope.products;
-    $scope.modal.scope.product = $scope.products[ID];
-
-    $scope.modal.scope.on_swipe_down = function () {
-      $scope.modal.hide();
-    };
-
-    $scope.modal.scope.add_to_panier = function (ID) {
-      Panier.add_to_panier(ID);
-    };
-
-    $scope.modal.scope.pack_size = Panier.get_panier(ID).size;
-
-    $scope.modal.scope.remove_from_panier = function (ID) {
-      Panier.remove_from_panier(ID);
-    };
-
-    $scope.modal.scope.push_to_panier = function (ID, obj) {
-      Panier.push_to_panier(ID, obj);
-
-    };
-
-    $scope.modal.scope.get_number = function(ID) {
-      return Panier.get_number(ID);
-    };
-  }
-})
-
-.controller('HomeCtrl', function($scope, $state, $ionicSlideBoxDelegate) {
-  $scope.startApp = function() {
-    $state.go('tab.products');
-  };
-  $scope.next = function() {
-    $ionicSlideBoxDelegate.next();
-  };
-  $scope.previous = function() {
-    $ionicSlideBoxDelegate.previous();
-  };
-
-  // Called each time the slide changes
-  $scope.slideChanged = function(index) {
-    $scope.slideIndex = index;
+  $scope.modal_products = function(ID) {
+    ModalProducts
+      .init('templates/modal-products.html', $scope, ID)
+      .then(function(modal) {
+        modal.show();
+      });
   };
 })

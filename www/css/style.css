@@ -11,7 +11,7 @@ body {
   cursor: url('http://ionicframework.com/img/finger.png'), auto;
 }
 .slider {
-  height: 80%;
+  height: 100%;
 }
 .slider-slide {
   padding-top: 80px;

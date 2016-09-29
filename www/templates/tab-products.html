@@ -11,7 +11,8 @@
       </div>
       <ion-list>
         <div ng-repeat="product in products">
-          <a ng-hide="product.category != category.id || product.display != true" class="item item-thumbnail-left" ng-click="show_modal(product.id)">
+          <a ng-hide="product.category != category.id || product.display != true" class="item item-thumbnail-left" ng-click="modal_products(product.id)">
+          <!-- "modal_products(product.id)"> -->
             <img ng-src="{{product.pic}}">
             <h2>{{product.name}}</h2>
             <div class="row">

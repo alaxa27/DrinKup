@@ -1,7 +1,6 @@
-drinkup.controller('ProductsCtrl', function($scope, $state, $ionicModal, Products, Chats, Panier, Categories, ModalProducts) {
+drinkup.controller('ProductsCtrl', function($scope, $state, $ionicModal, Products, Categories, ModalProducts, ModalCart) {
   $scope.categories = Categories.all();
   $scope.products = Products.all();
-  console.log($scope.products);
 
   $scope.modal_products = function(ID) {
     ModalProducts
@@ -11,6 +10,19 @@ drinkup.controller('ProductsCtrl', function($scope, $state, $ionicModal, Product
       });
   };
   $ionicModal.fromTemplateUrl('templates/modal-products.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
+  $scope.modal_cart = function() {
+    ModalCart
+      .init('templates/modal-cart.html', $scope)
+      .then(function(modal) {
+        modal.show();
+      });
+  };
+  $ionicModal.fromTemplateUrl('templates/modal-cart.html', {
     scope: $scope
   }).then(function(modal) {
     $scope.modal = modal;

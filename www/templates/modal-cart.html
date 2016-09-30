@@ -1,17 +1,15 @@
 <ion-modal-view on-swipe-down="on_swipe_down()">
   <ion-header-bar class="bar bar-header bar-positive">
-    <h1 class="title">{{product.name}}</h1>
+    <h1 class="title">Panier</h1>
     <button class="ion-chevron-down button button-clear button-primary" ng-click="modal.hide()"></button>
   </ion-header-bar>
   <ion-content class="padding">
     <ion-list>
-      <div ng-repeat="option in product.options">
-        <ion-item ng-click="push_to_cart(product, option)">
-          <row>
-            <h2>{{option.description}}</h2><p> {{option.price}}€</p>
-          </row>
-        </ion-item>
-      </div>
+      <ion-item ng-repeat="item in cart">
+        <h2>{{item.product.name}}</h2>
+        <p ng-repeat="i in item.items">{{i.description}} | x {{i.quantity}} | prix: {{i.price*i.quantity}}€</p>
+      </ion-item>
     </ion-list>
+    <h1>Total: {{calc_total()}}€
   </ion-content>
 </ion-modal-view>

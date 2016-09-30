@@ -1,4 +1,4 @@
-drinkup.factory('ModalProducts', function($ionicModal, $rootScope) {
+drinkup.factory('ModalProducts', function($ionicModal, $rootScope, Cart) {
   var init = function(tpl, scope, ID) {
     var promise;
     $scope = scope || $rootScope.$new();
@@ -12,29 +12,14 @@ drinkup.factory('ModalProducts', function($ionicModal, $rootScope) {
      $scope.$on('$destroy', function() {
        $scope.modal.remove();
      });
-    //  $scope.modal.product = $scope.products[ID];
-    //  $scope.modal.products = $scope.products;
     $scope.on_swipe_down = function () {
       $scope.modal.hide();
     };
-     //
-    //  $scope.modal.add_to_panier = function (ID) {
-    //    Panier.add_to_panier(ID);
-    //    $scope.modal.pack_size = Panier.get_panier(ID).size;
-    //  };
-     //
-    //  $scope.modal.remove_from_panier = function (ID) {
-    //    Panier.remove_from_panier(ID);
-    //  };
-     //
-    //  $scope.modal.scope.push_to_panier = function (ID, obj) {
-    //    Panier.push_to_panier(ID, obj);
-    //
-    //  };
-     //
-    //  $scope.modal.get_number = function(ID) {
-    //    return Panier.get_number(ID);
-    //  };
+
+    $scope.push_to_cart = function (product, item) {
+      Cart.push_to_cart(product, item);
+      $scope.modal.hide();
+    };
 
      promise = $ionicModal.fromTemplateUrl(tpl, {
        scope: $scope,

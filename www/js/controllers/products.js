@@ -1,24 +1,7 @@
-drinkup.controller('ProductsCtrl', function($scope, $state, $ionicModal, Chats, Panier, Categories, ModalProducts) {
+drinkup.controller('ProductsCtrl', function($scope, $state, $ionicModal, Products, Chats, Panier, Categories, ModalProducts) {
   $scope.categories = Categories.all();
-  $scope.panier = Panier.all();
-  $scope.products = Chats.all();
-
-  $scope.get_number = function(ID) {
-    return Panier.get_number(ID);
-  };
-
-  $scope.add_to_panier = function (ID) {
-    Panier.add_to_panier(ID);
-  };
-
-  $scope.remove_from_panier = function (ID) {
-    Panier.remove_from_panier(ID);
-  };
-
-  $scope.push_to_panier = function (ID, obj) {
-    Panier.push_to_panier(ID, obj);
-
-  };
+  $scope.products = Products.all();
+  console.log($scope.products);
 
   $scope.modal_products = function(ID) {
     ModalProducts
@@ -27,6 +10,48 @@ drinkup.controller('ProductsCtrl', function($scope, $state, $ionicModal, Chats, 
         modal.show();
       });
   };
+  $ionicModal.fromTemplateUrl('templates/modal-products.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+})
+
+
+
+
+
+
+
+
+  // $scope.categories = Categories.all();
+  // $scope.panier = Panier.all();
+  // $scope.products = Chats.all();
+  //
+  // $scope.get_number = function(ID) {
+  //   return Panier.get_number(ID);
+  // };
+  //
+  // $scope.add_to_panier = function (ID) {
+  //   Panier.add_to_panier(ID);
+  // };
+  //
+  // $scope.remove_from_panier = function (ID) {
+  //   Panier.remove_from_panier(ID);
+  // };
+  //
+  // $scope.push_to_panier = function (ID, obj) {
+  //   Panier.push_to_panier(ID, obj);
+  //
+  // };
+  //
+  // $scope.modal_products = function(ID) {
+  //   ModalProducts
+  //     .init('templates/modal-products.html', $scope, ID)
+  //     .then(function(modal) {
+  //       modal.show();
+  //     });
+  // };
   // $ionicModal.fromTemplateUrl('templates/modal-products.html', {
   //   scope: $scope
   // }).then(function(modal) {
@@ -65,5 +90,3 @@ drinkup.controller('ProductsCtrl', function($scope, $state, $ionicModal, Chats, 
     $scope.contacts.push({ name: u.firstName + ' ' + u.lastName });
     $scope.modal.hide();
   };*/
-
-})

@@ -4,8 +4,17 @@
     <button class="ion-chevron-down button button-clear button-primary" ng-click="modal.hide()"></button>
   </ion-header-bar>
   <ion-content class="padding">
-    <div class="list">
-      <div class="row">
+    <ion-list>
+      <ion-item ng-repeat="option in product.options" ng-click="push_to_panier(product, option)">
+        <row>
+          <h2>{{option.description}}</h2><p> {{option.price}}€</p>
+        </row>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-modal-view>
+
+      <!-- <div class="row">
         <button class="disable-hover button button-default button-light button-icon-right" ng-click="remove_from_panier(product.id)">
           <span class="button-inner">
           <i class="icon ion-ios-minus button-size"></i>
@@ -32,6 +41,4 @@
             </ion-list>
         </row>
       </ion-radio>
-    </ion-list>
-  </ion-content>
-</ion-modal-view>
+    </ion-list> -->

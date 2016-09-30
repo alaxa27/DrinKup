@@ -6,11 +6,11 @@ drinkup.factory('Categories', function() {
   }, {
     id: 1,
     name:'Alcools',
-    prods: [3, 4]
+    prods: [0, 3, 4]
   }, {
     id: 2,
     name: 'Fumette',
-    prods: [0, 1, 2]
+    prods: [1, 2]
   }]
 
   return {

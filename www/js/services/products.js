@@ -97,4 +97,33 @@ drinkup.factory('Chats', function() {
       return null;
     }
   };
-})
+});
+
+drinkup.factory('Products', function () {
+  var products = [{
+    id: 0,
+    display: true,
+    name: "Poliakov",
+    category: 1,
+    pic: "img/poliakov_70cL.jpg",
+    options: [{
+      id: 0,
+      description: "Volume: 70cL",
+      price: 15
+    }, {
+      id: 1,
+      description: "Volume: 1L",
+      price: 20
+    }, {
+      id: 2,
+      description: "Volume: 2L",
+      price: 25
+    }]
+  }];
+
+  return {
+    all: function () {
+      return products;
+    }
+  };
+});

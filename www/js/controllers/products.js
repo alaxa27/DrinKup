@@ -1,7 +1,12 @@
-drinkup.controller('ProductsCtrl', function($scope, $state, $ionicModal, Products, Categories, ModalProducts, ModalCart) {
+drinkup.controller('ProductsCtrl', function($scope, $state, $ionicModal, Products, Cart, Categories, ModalProducts, ModalCart) {
   $scope.categories = Categories.all();
   $scope.products = Products.all();
 
+  $scope.calc_total = function () {
+    return Cart.calc_total();
+  }
+
+  //Modals
   $scope.modal_products = function(ID) {
     ModalProducts
       .init('templates/modal-products.html', $scope, ID)

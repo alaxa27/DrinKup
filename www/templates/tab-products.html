@@ -1,7 +1,7 @@
 <ion-view view-title="Produits">
   <ion-nav-buttons side="right">
-    <a class="button" ng-click="modal_cart()"" >
-      Panier!
+    <a class="button ion-ios-cart-outline" ng-click="modal_cart()" >
+      {{calc_total()}}€
     </a>
   </ion-nav-buttons>
   <ion-content>

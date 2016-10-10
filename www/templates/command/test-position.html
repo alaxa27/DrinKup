@@ -1,32 +1,30 @@
 <ion-view view-title="Test Livrabilité">
   <ion-content>
-    <div class="list list-inset">
-      <label class="item item-input">
-        <i class="icon ion-location placeholder-icon"></i>
-        <input type="text" placeholder="Adresse" ng-model="address">
-      </label>
-    </div>
-    <button ng-click="test_position()"class="button button-full button-calm">
-        Test ta position!
-    </button>
+    <form>
+      <div class="list list-inset">
+        <label class="item item-input">
+          <i class="icon ion-location placeholder-icon"></i>
+          <input type="text" placeholder="Adresse" ng-model="data.address">
+        </label>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button ng-click="test_address()"class="button button-block button-calm">
+            Mon adresse
+          </button>
+        </div>
+        <div class="col">
+          <button ng-click="test_position()" class="button button-block button-positive">
+            Ma position
+          </button>
+        </div>
+      </div>
+    </form>
+    <p>
     {{time}}
 
-
-
-
-
-
-
-
-
-
-
-
-
-        <strong>Results</strong>
-      </div>
-      <div id="output"></div>
-    </div>
-    <div id="map"></div>
+    Lat: {{lat}}
+    Long: {{long}}
+  </p>
   </ion-content>
 </ion-view>

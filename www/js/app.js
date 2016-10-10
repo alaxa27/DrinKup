@@ -32,7 +32,7 @@ var TEST_MODE = true;
 
 
 
-var drinkup = angular.module('starter', ['ionic', 'ionic.cloud', 'stripe.checkout', 'starter.controllers', 'starter.services'])
+var drinkup = angular.module('starter', ['ionic', 'ionic.cloud', 'ngCordova', 'stripe.checkout', 'starter.controllers', 'starter.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

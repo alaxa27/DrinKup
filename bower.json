@@ -1,7 +1,10 @@
 {
-    "name": "DrinKup",
-    "dependencies": {
-	    "ionicons" : "latest",
-	    "angular-stripe-checkout" : "latest"
-    }
+  "name": "DrinKup",
+  "dependencies": {
+    "ionicons": "latest",
+    "angular-stripe-checkout": "latest"
+  },
+  "devDependencies": {
+    "ngCordova": "^0.1.27-alpha"
+  }
 }

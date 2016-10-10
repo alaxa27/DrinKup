@@ -4,7 +4,7 @@
       <div class="list list-inset">
         <label class="item item-input">
           <i class="icon ion-location placeholder-icon"></i>
-          <input type="text" placeholder="Adresse" ng-model="data.address">
+          <input type="text" id="search-bar" placeholder="Adresse" ng-model="data.address">
         </label>
       </div>
       <div class="row">
@@ -20,11 +20,6 @@
         </div>
       </div>
     </form>
-    <p>
-    {{time}}
-
-    Lat: {{lat}}
-    Long: {{long}}
-  </p>
+    <h1>{{time}}</h1>
   </ion-content>
 </ion-view>

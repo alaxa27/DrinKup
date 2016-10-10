@@ -17,6 +17,7 @@ drinkup.controller('TestPositionCtrl', function($scope, $cordovaGeolocation, $io
        console.log("The loading indicator is now displayed");
     });
   };
+
   hide_loading = function(){
     $ionicLoading.hide().then(function(){
        console.log("The loading indicator is now hidden");
@@ -36,22 +37,20 @@ drinkup.controller('TestPositionCtrl', function($scope, $cordovaGeolocation, $io
         var long = position.coords.longitude;
         $scope.lat = lat;
         $scope.long = long;
-        $scope.time = google_matrix_calculation(lat + ', ' + long);
-        hide_loading();
+        google_matrix_calculation(lat + ', ' + long);
       }, function(err) {
         hide_loading();
         GPS_alert();
       }, {
-         maximumAge: 3000,
-         timeout: 5000,
-         enableHighAccuracy: true
+       maximumAge: 3000,
+       timeout: 5000,
+       enableHighAccuracy: true
       });
   }
 
   $scope.test_address = function () {
     show_loading();
     google_matrix_calculation($scope.data.address);
-    hide_loading();
   }
 
   var google_matrix_calculation = function (position) {
@@ -75,16 +74,25 @@ drinkup.controller('TestPositionCtrl', function($scope, $cordovaGeolocation, $io
     }, function(response, status) {
       if (status !== 'OK') {
         alert('Error was: ' + status);
+        hide_loading();
       } else {
-        $scope.time = response.rows[0].elements[0].duration.text.toString();
+        if (response.rows[0].elements[0].status === 'OK') {
+          $scope.time = response.rows[0].elements[0].duration.text.toString();
+        }
+        hide_loading();
       }
     });
   }
 
-  function deleteMarkers(markersArray) {
-    for (var i = 0; i < markersArray.length; i++) {
-      markersArray[i].setMap(null);
-    }
-    markersArray = [];
+  function initialize() {
+    var input = document.getElementById('search-bar');
+    var autocomplete = new google.maps.places.Autocomplete(input);
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+      console.log("here");
+      $scope.data.address = this.getPlace();
+    });
   }
+
+
+  google.maps.event.addDomListener(window, 'load', initialize);
 })

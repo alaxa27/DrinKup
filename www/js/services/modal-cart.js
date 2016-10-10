@@ -1,4 +1,4 @@
-drinkup.factory('ModalCart', function($ionicModal, $rootScope, Cart) {
+drinkup.factory('ModalCart', function($ionicModal, $state, $rootScope, Cart) {
   var init = function(tpl, scope) {
     var promise;
     $scope = scope || $rootScope.$new();
@@ -15,6 +15,11 @@ drinkup.factory('ModalCart', function($ionicModal, $rootScope, Cart) {
     $scope.on_swipe_down = function () {
       $scope.modal.hide();
     };
+
+    $scope.command = function () {
+      $state.go("test-position");
+      $scope.modal.hide();
+    }
 
     $scope.cart = Cart.all();
     $scope.calc_total = function () {

@@ -11,8 +11,8 @@
       </ion-item>
     </ion-list>
     <h1>Total: {{calc_total()}}€
-    <button class="button button-full button-balanced">
-        Payer!
+    <button ng-if="calc_total() > 0"class="button button-full button-balanced" ng-click="command()">
+        Commander!
     </button>
   </ion-content>
 </ion-modal-view>

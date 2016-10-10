@@ -21,9 +21,12 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope) {
+.controller('AccountCtrl', function($scope, $ionicAuth, $ionicUser) {
   $scope.settings = {
     enableFriends: true
+  };
+  $scope.facebook_login = function () {
+    $ionicAuth.login('facebook').then(console.log('here'));
   };
 })
 

@@ -4,7 +4,7 @@
       {{calc_total()}}€
     </a>
   </ion-nav-buttons>
-  <ion-content>
+  <ion-content [has-bouncing="true"]>
     <div ng-repeat="category in categories" >
       <div class="item item-divider">
         {{category.name}}

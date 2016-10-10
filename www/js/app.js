@@ -32,8 +32,7 @@ var TEST_MODE = true;
 
 
 
-
-var drinkup = angular.module('starter', ['ionic', 'stripe.checkout', 'starter.controllers', 'starter.services'])
+var drinkup = angular.module('starter', ['ionic', 'ionic.cloud', 'stripe.checkout', 'starter.controllers', 'starter.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -51,8 +50,13 @@ var drinkup = angular.module('starter', ['ionic', 'stripe.checkout', 'starter.co
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, StripeCheckoutProvider) {
-
+.config(function($ionicCloudProvider, $stateProvider, $urlRouterProvider, $ionicConfigProvider, StripeCheckoutProvider) {
+  /////////////////////////////////////////////////////
+  $ionicCloudProvider.init({
+    "core": {
+      "app_id": "fb6a4b40"
+    }
+  });
 
   // Defines your checkout key
   switch (TEST_MODE) {
@@ -65,6 +69,7 @@ var drinkup = angular.module('starter', ['ionic', 'stripe.checkout', 'starter.co
       StripeCheckoutProvider.defaults({key: NOODLIO_PAY_CHECKOUT_KEY['live']});
       break
   };
+  ////////////////////////////////////////////////////////////////////////////
 
 
   // Ionic uses AngularUI Router which uses the concept of states
@@ -75,6 +80,13 @@ var drinkup = angular.module('starter', ['ionic', 'stripe.checkout', 'starter.co
   $stateProvider
 
   // setup an abstract state for the tabs directive
+
+  .state('test-position', {
+    url: '/command/test-position',
+    templateUrl: 'templates/command/test-position.html',
+    controller: 'TestPositionCtrl'
+  })
+
   .state('intro', {
   url: '/',
   templateUrl: 'templates/intro.html',

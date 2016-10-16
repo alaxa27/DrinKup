@@ -16,7 +16,7 @@
     </button>
     <button class="button button-positive button-clear no-animation"
             ng-click="startApp()" ng-show="slideIndex == 2">
-      Start using MyApp
+      Start
     </button>
   </ion-nav-buttons>
   <ion-slide-box on-slide-changed="slideChanged(index)">
@@ -46,7 +46,7 @@
     </ion-slide>
     <ion-slide>
       <h3>Any questions?</h3>
-      <button class="button bar bar-header bar-positive" ng-click="facebook_login()">
+      <button class="button bar bar-header bar-positive" ng-click="facebook_login()" ng-if="!logged_in()">
         <h1 class="title">Facebook</h1>
       </button>
     </ion-slide>

@@ -1,8 +1,7 @@
-drinkup.controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate, $ionicAuth, $ionicUser) {
-
+drinkup.controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate, $FacebookAuth, $ionicUser) {
   // Called to navigate to the main app
   $scope.startApp = function() {
-    $state.go('tab.products');
+    $state.go('tab.events');
   };
   $scope.next = function() {
     $ionicSlideBoxDelegate.next();
@@ -16,7 +15,17 @@ drinkup.controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate,
     $scope.slideIndex = index;
   };
 
+  $scope.logged_in = function() {
+    if (window.localStorage.getItem("logged_in")){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   $scope.facebook_login = function () {
-    $ionicAuth.login('facebook');
+    $FacebookAuth.login().then(function(){
+      window.localStorage.setItem("logged_in", "true");
+    });
   };
 });

@@ -32,7 +32,7 @@ var TEST_MODE = true;
 
 
 
-var drinkup = angular.module('starter', ['ionic', 'ionic.cloud', 'ngCordova', 'stripe.checkout', 'starter.controllers', 'starter.services'])
+var drinkup = angular.module('starter', ['ionic', 'ionic.cloud', 'ionic.native', 'stripe.checkout', 'starter.controllers', 'starter.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -55,6 +55,11 @@ var drinkup = angular.module('starter', ['ionic', 'ionic.cloud', 'ngCordova', 's
   $ionicCloudProvider.init({
     "core": {
       "app_id": "fb6a4b40"
+    },
+    "auth": {
+      "facebook": {
+        "scope": ["email", "public_profile"]
+      }
     }
   });
 
@@ -121,16 +126,12 @@ var drinkup = angular.module('starter', ['ionic', 'ionic.cloud', 'ngCordova', 's
     }
   })
 
-  .state('tab.panier', {
-      url: '/panier',
+  .state('tab.events', {
+      url: '/events',
       views: {
-        'tab-panier': {
-          templateUrl: 'templates/tab-panier.html',
-          controller: 'PanierCtrl',
-          resolve: {
-            // checkout.js isn't fetched until this is resolved.
-            stripe: StripeCheckoutProvider.load
-          }
+        'tab-events': {
+          templateUrl: 'templates/tab-events.html',
+          controller: 'EventsCtrl'
         }
       }
     })

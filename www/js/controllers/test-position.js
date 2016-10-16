@@ -1,9 +1,10 @@
 drinkup.controller('TestPositionCtrl', function($scope, $cordovaGeolocation, $ionicPopup, $ionicLoading) {
 
-  GPS_alert = function() {
+  GPS_alert = function(err) {
     var alertPopup = $ionicPopup.alert({
       title: 'GPS Error!',
-      template: 'Activez le positionnement.'
+      template: err.message
+      // template: 'Activez le positionnement.'
     });
     alertPopup.then(function(res) {
       console.log('error gps alert');
@@ -29,26 +30,50 @@ drinkup.controller('TestPositionCtrl', function($scope, $cordovaGeolocation, $io
   };
   $scope.time = ""
 
-  $scope.test_position = function () {
-    show_loading();
-    navigator.geolocation
-      .getCurrentPosition(function (position) {
-        var lat  = position.coords.latitude;
-        var long = position.coords.longitude;
-        $scope.lat = lat;
-        $scope.long = long;
-        google_matrix_calculation(lat + ', ' + long);
-      }, function(err) {
-        hide_loading();
-        GPS_alert();
-      }, {
-       maximumAge: 3000,
-       timeout: 5000,
-       enableHighAccuracy: true
-      });
+  $scope.find_position = function () {
+    cordova.plugins.diagnostic.isLocationAvailable(function(available){
+      if(!available) {
+        cordova.plugins.diagnostic.switchToLocationSettings();
+      }
+      if(available) {
+        show_loading();
+        navigator.geolocation
+          .getCurrentPosition(function (position) {
+            var lat  = position.coords.latitude;
+            var long = position.coords.longitude;
+            $scope.data.address = lat + ', ' + long;
+            hide_loading();
+            // var geocoder = new google.maps.Geocoder;
+            // var latLng = new google.maps.LatLng(lat, long);
+            // geocoder.geocode({'location': latLng}, function(results, status){
+            //   if (status === google.maps.GeocoderStatus.OK){
+            //     if (results[1]) {
+            //       $scope.data.address = results[1].formatted_address;
+            //     } else {
+            //       $scope.data.address = lat + ', ' + long;
+            //     }
+            //   } else {
+            //     GPS_alert('Error: ' + status);
+            //   }
+            //   hide_loading();
+            // });
+          }, function(err) {
+            hide_loading();
+            GPS_alert(err);
+          }, {
+           maximumAge: 20000,
+           timeout: 12000,
+           enableHighAccuracy: false
+          });
+      } else {
+        GPS_alert({message: "Activez le positionnement."})
+      }
+    }, function(error){
+        console.error("The following error occurred: "+error);
+    });
   }
 
-  $scope.test_address = function () {
+  $scope.test = function () {
     show_loading();
     google_matrix_calculation($scope.data.address);
   }
@@ -73,7 +98,7 @@ drinkup.controller('TestPositionCtrl', function($scope, $cordovaGeolocation, $io
       avoidTolls: true
     }, function(response, status) {
       if (status !== 'OK') {
-        alert('Error was: ' + status);
+        console.log('Error was: ' + status);
         hide_loading();
       } else {
         if (response.rows[0].elements[0].status === 'OK') {
@@ -86,9 +111,8 @@ drinkup.controller('TestPositionCtrl', function($scope, $cordovaGeolocation, $io
 
   function initialize() {
     var input = document.getElementById('search-bar');
-    var autocomplete = new google.maps.places.Autocomplete(input);
+    autocomplete = new google.maps.places.Autocomplete(input);
     google.maps.event.addListener(autocomplete, 'place_changed', function () {
-      console.log("here");
       $scope.data.address = this.getPlace();
     });
   }

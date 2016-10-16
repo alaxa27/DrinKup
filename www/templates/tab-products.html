@@ -13,11 +13,14 @@
         <div ng-repeat="product in products">
           <a ng-hide="product.category != category.id || product.display != true" class="item item-thumbnail-left" ng-click="modal_products(product.id)">
             <img ng-src="{{product.pic}}">
-            <h2>{{product.name}}</h2>
             <div class="row">
-              <div class="ion-chevron-right"></div>
+            <div class="col col-75">
+              <h2>{{product.name}}</h2>
             </div>
-            <p>{{product.description}}</p>
+            <div class="col col-25">
+              <div class="ion-chevron-right button-icon icon"></div>
+            </div>
+          </div>
           </a>
         </div>
       </ion-list>

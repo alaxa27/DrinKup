@@ -2,23 +2,21 @@
   <ion-content>
     <form>
       <div class="list list-inset">
-        <label class="item item-input">
-          <i class="icon ion-location placeholder-icon"></i>
-          <input type="text" id="search-bar" placeholder="Adresse" ng-model="data.address">
-        </label>
-      </div>
-      <div class="row">
-        <div class="col">
-          <button ng-click="test_address()"class="button button-block button-calm">
-            Mon adresse
-          </button>
+        <div class="row">
+        <div class="col col-75">
+          <label class="item item-input">
+            <i class="icon ion-location placeholder-icon"></i>
+            <input type="text" id="search-bar" placeholder="Adresse" ng-model="data.address">
+          </label>
         </div>
         <div class="col">
-          <button ng-click="test_position()" class="button button-block button-positive">
-            Ma position
-          </button>
+          <i class="button button-icon icon ion-pinpoint" ng-click="find_position()"></i>
         </div>
       </div>
+      </div>
+      <button ng-click="test()" class="button button-full button-positive">
+        Test
+      </button>
     </form>
     <h1>{{time}}</h1>
   </ion-content>
